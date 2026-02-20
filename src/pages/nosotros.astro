@@ -1,5 +1,12 @@
 ---
     import Layout from '../layouts/Layout.astro'
+    import {BaseWPSSchema} from '@/types/'
+
+    const url = 'http://coffeeshop.local/wp-json/wp/v2/pages?slug=nosotros'
+    const response = await fetch(url)
+    const json = await response.json()
+    const data = BaseWPSSchema.parse(json[0])
+    console.log(data)
 ---
 
 <Layout title='nosotros' subtitle='' bgImage=''>
