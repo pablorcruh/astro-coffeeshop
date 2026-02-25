@@ -1,16 +1,27 @@
 ---
+    import {Picture} from 'astro:assets'
     import Layout from '../layouts/Layout.astro'
     import {BaseWPSSchema} from '@/types/'
 
     const url = 'http://coffeeshop.local/wp-json/wp/v2/pages?slug=nosotros'
     const response = await fetch(url)
     const json = await response.json()
-    const data = BaseWPSSchema.parse(json[0])
-    console.log(data)
+    const data = BaseWPSSchema.parse(json[0]
 ---
 
-<Layout title{data.title.rendered}
+<Layout title={data.title.rendered}
         subtitle={data.acf.subtitle} 
         bgImage={data.featured_images.full.url}
 >
+    <Picture
+        src={data.featured_images.medium_large.url}
+        alt={`Imagen de ${data.title.rendered}`}
+        width={data.featured_images.medium_large.width}
+        height={data.featured_images.medium_large.height}
+        formats={['avif', 'webp']}
+    />
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div class="text-xl space-y-3 mt-10 lg:mt-0" set:html={data.content.rendered}></div>
+    </div>
 </Layout>
