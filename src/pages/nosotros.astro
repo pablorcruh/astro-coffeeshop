@@ -1,12 +1,12 @@
 ---
-    import {Picture} from 'astro:assets'
-    import Layout from '../layouts/Layout.astro'
-    import {BaseWPSSchema} from '@/types/'
+    import {Picture} from 'astro:assets';
+    import Layout from '../layouts/Layout.astro';
+    import {BaseWPSSchema} from '@/types/';
 
-    const url = 'http://coffeeshop.local/wp-json/wp/v2/pages?slug=nosotros'
-    const response = await fetch(url)
-    const json = await response.json()
-    const data = BaseWPSSchema.parse(json[0]
+    const url = 'http://coffeeshop.local/wp-json/wp/v2/pages?slug=nosotros';
+    const response = await fetch(url);
+    const json = await response.json();
+    const data = BaseWPSSchema.parse(json[0];
 ---
 
 <Layout title={data.title.rendered}
